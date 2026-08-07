@@ -2609,11 +2609,4 @@ def run_bot():
             time.sleep(5)
 
 if __name__ == "__main__":
-    run_bot()RUN =====================
-def run_bot():
-    keep_alive()
-    try:
-        bot.remove_webhook()
-        time.sleep(1)
-    except Exception:
-        logging.error(traceback.format_exc(
+    run_bot()
