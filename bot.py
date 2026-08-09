@@ -1201,7 +1201,7 @@ def infinite_otp_search(chat_id, start_numbers, search_msg_id):
                                     f"╔━━━━━━━━━━━━━━━╗\n"
                                     f"║{flag2}  {matched_num}    #{service.upper()}║\n"
                                     f"╚━━━━━━━━━━━━━━━╝\n\n"
-                                    f"</blockquote>\n{full_msg}"
+                                    f"</blockquote>{full_msg}"
                                 )
                                 kb = otp_result_markup(otp, price=current_price)
                                 try:
@@ -1274,7 +1274,7 @@ def infinite_otp_search(chat_id, start_numbers, search_msg_id):
                             f"╔━━━━━━━━━━━━━━━╗\n"
                             f"║{display_flag}  {matched_num}    #{service.upper()}║\n"
                             f"╚━━━━━━━━━━━━━━━╝\n\n"
-                            f"</blockquote>\n{full_msg}"
+                            f"</blockquote>{full_msg}"
                         )
                         kb = otp_result_markup(otp, price=current_price)
                         try:
