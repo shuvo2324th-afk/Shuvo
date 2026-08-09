@@ -1201,7 +1201,7 @@ def infinite_otp_search(chat_id, start_numbers, search_msg_id):
                                     f"╔━━━━━━━━━━━━━━━╗\n"
                                     f"║{flag2}  {matched_num}    #{service.upper()}║\n"
                                     f"╚━━━━━━━━━━━━━━━╝\n\n"
-                                    f"<blockquote>{full_msg_nexus}</blockquote>"
+                                    f"{full_msg_nexus}</blockquote>")
                                 )
                                 kb = otp_result_markup(otp, price=current_price)
                                 try:
@@ -1237,7 +1237,7 @@ def infinite_otp_search(chat_id, start_numbers, search_msg_id):
                             continue
                         if msg_id in used_otps.get(chat_id, []):
                             continue
-                        if chat_id not in used_otps:
+                        if chat_id notblockquottps:
                             used_otps[chat_id] = []
                         if chat_id not in global_used_otps:
                             global_used_otps[chat_id] = set()
@@ -1274,7 +1274,7 @@ def infinite_otp_search(chat_id, start_numbers, search_msg_id):
                             f"╔━━━━━━━━━━━━━━━╗\n"
                             f"║{display_flag}  {matched_num}    #{service.upper()}║\n"
                             f"╚━━━━━━━━━━━━━━━╝\n\n"
-                            f"<blockquote>{full_msg}</blockquote>"
+                            f"{full_msg}</blockquote>")
                         )
                         kb = otp_result_markup(otp, price=current_price)
                         try:
