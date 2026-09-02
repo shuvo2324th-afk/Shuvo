@@ -874,12 +874,7 @@ async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Use /start to open the panel.")
 
 
-def main():
-    # Flask keep-alive thread শুরু করছি
-    t = threading.Thread(target=run_flask, daemon=True)
-    t.start()
-    logging.info("🌐 Flask server started on port %s", os.environ.get('PORT', 8080))
-
+async def run_bot():
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("generate", generate))
@@ -887,7 +882,20 @@ def main():
     app.add_handler(CallbackQueryHandler(callbacks))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_handler))
     logging.info("🤖 Bot polling started...")
-    app.run_polling()
+    async with app:
+        await app.start()
+        await app.updater.start_polling()
+        await asyncio.Event().wait()
+
+
+def main():
+    # Flask keep-alive আলাদা daemon thread-এ চলবে
+    t = threading.Thread(target=run_flask, daemon=True)
+    t.start()
+    logging.info("🌐 Flask server started on port %s", os.environ.get('PORT', 8080))
+
+    # Bot main thread-এ asyncio.run() দিয়ে চলবে
+    asyncio.run(run_bot())
 
 
 if __name__ == "__main__":
