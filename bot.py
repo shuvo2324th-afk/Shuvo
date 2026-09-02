@@ -15,7 +15,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQu
 
 BOT_TOKEN = "8764978166:AAF4kcucI1unskbmtDDImyEAtmRV_f9Pq-I"
 ADMIN_ID = 6136815573
-GROUP_ID = "-1002670575248"  # e.g. -1001234567890
+GROUP_ID = -1003875639913
 
 OTP_LENGTH = 6
 PAGE_SIZE = 12
@@ -245,7 +245,7 @@ COUNTRIES = [
     ('(599)(BQ)🇧🇶 Bonaire', '🇧🇶', '5780471598922337683'),
 ]
 
-SERVICES = [('📘 Facebook', '5334807341109908955'), ('💬 WhatsApp', '5334759662677957452'), ('✈️ Telegram', '5337010556253543833'), ('💼 WhatsApp Businesses', '5336814486701514414'), ('💭 Imo', '5337155807752524558'), ('📸 Instagram', '5334868205091459431'), ('🍎 Apple', '5334637951894722661'), ('🔍 Google', '5335010201005231986'), ('🪟 Microsoft', '5334880948259427772'), ('🧑\u200d🤝\u200d🧑 Teams', '5334590977837403844'), ('🎵 Tiktok', '5339213256001102461'), ('🏦 Bkash', '5348469219761626211'), ('🚀 Rocket', '5346042941196507141'), ('📈 Bybit', '5348372939479751825'), ('💱 Binance', '5348212415077064131'), ('🌟 Melbet', '5337102391244263212'), ('👻 Snapchat', '5359441366554255082'), ('🚗 Uber', '5298715455316303708'), ('💵 PayPal', '5776103539872896061'), ('🎬 Discord', '5116246243646898866'), ('🌟 Amazon', '4995019580536524226'), ('💜 Viber', '5463060437572528782'), ('💼 Linkedin', '6224222994265279792'), ('🔒 Line', '5399818044866327279'), ('🌟 Wechat', '5782757599560602950'), ('🐦 Twitter', '5215726959056662534'), ('👽 Reddit', '4992421103847604984'), ('📌 Pinterest', '5346103513120258857'), ('🎮 Twitch', '5233333563306301418'), ('📹 Zoom', '5881799193219043268'), ('💬 Signal', '5293998404404272267'), ('💻 Slack', '4994972469040251302'), ('☎️ Skype', '4992613535562334989'), ('🎥 Netflix', '6255738712664050133'), ('🎵 Spotify', '5411392711146095115'), ('📺 Amazon Prime', '6111801057061374810'), ('🍿 Hoichoi', '6104822598493801746'), ('📦 Daraz', '5336879280578138635'), ('🐼 Foodpanda', '5336879280578138635'), ('🛵 Pathao', '5336879280578138635'), ('🛒 AliExpress', '5336879280578138635'), ('🛍️ Shopee', '5336879280578138635'), ('💳 Payoneer', '5336879280578138635'), ('🦉 Wise', '5336879280578138635'), ('🤖 ChatGPT', '5296516998996445955'), ('📓 Notion', '5336879280578138635'), ('🐙 GitHub', '5417836094098007862'), ('🖌️ Canva', '5111661409008092227'), ('🎨 Figma', '5336879280578138635'), ('💼 Upwork', '5336879280578138635'), ('🟢 Fiverr', '5336879280578138635'), ('🌐 Yahoo', '5336879280578138635'), ('☁️ Dropbox', '5336879280578138635'), ('📚 Coursera', '5336879280578138635'), ('🗣️ Duolingo', '5336879280578138635'), ('📱 QSMS', '6321257309188136835'), ('📸 INSTAGRAM', '5334868205091459431'), ('💄 HSBC', '5161519678597629383'), ('🎵 TIK TOK', '5327982530702359565'), ('🩵 TIK TOK', '5391044040860906456')]
+SERVICES = [('📘 Facebook', '5334807341109908955'), ('💬 WhatsApp', '5334759662677957452'), ('📸 Instagram', '5334868205091459431'), ('✈️ Telegram', '5337010556253543833'), ('💄 HSBC', '5161519678597629383'), ('💭 Imo', '5337155807752524558'), ('🍎 Apple', '5334637951894722661'), ('🔍 Google', '5335010201005231986'), ('🪟 Microsoft', '5334880948259427772'), ('🧑\u200d🤝\u200d🧑 Teams', '5334590977837403844'), ('🎵 Tiktok', '5339213256001102461'), ('🏦 Bkash', '5348469219761626211'), ('🚀 Rocket', '5346042941196507141'), ('📈 Bybit', '5348372939479751825'), ('💱 Binance', '5348212415077064131'), ('🌟 Melbet', '5337102391244263212'), ('👻 Snapchat', '5359441366554255082'), ('🚗 Uber', '5298715455316303708'), ('💵 PayPal', '5776103539872896061'), ('🎬 Discord', '5116246243646898866'), ('🌟 Amazon', '4995019580536524226'), ('💜 Viber', '5463060437572528782'), ('💼 Linkedin', '6224222994265279792'), ('🔒 Line', '5399818044866327279'), ('🌟 Wechat', '5782757599560602950'), ('🐦 Twitter', '5215726959056662534'), ('👽 Reddit', '4992421103847604984'), ('📌 Pinterest', '5346103513120258857'), ('🎮 Twitch', '5233333563306301418'), ('📹 Zoom', '5881799193219043268'), ('💬 Signal', '5293998404404272267'), ('💻 Slack', '4994972469040251302'), ('☎️ Skype', '4992613535562334989'), ('🎥 Netflix', '6255738712664050133'), ('🎵 Spotify', '5411392711146095115'), ('📺 Amazon Prime', '6111801057061374810'), ('🍿 Hoichoi', '6104822598493801746'), ('📦 Daraz', '5336879280578138635'), ('🐼 Foodpanda', '5336879280578138635'), ('🛵 Pathao', '5336879280578138635'), ('🛒 AliExpress', '5336879280578138635'), ('🛍️ Shopee', '5336879280578138635'), ('💳 Payoneer', '5336879280578138635'), ('🦉 Wise', '5336879280578138635'), ('🤖 ChatGPT', '5296516998996445955'), ('📓 Notion', '5336879280578138635'), ('🐙 GitHub', '5417836094098007862'), ('🖌️ Canva', '5111661409008092227'), ('🎨 Figma', '5336879280578138635'), ('💼 Upwork', '5336879280578138635'), ('🟢 Fiverr', '5336879280578138635'), ('🌐 Yahoo', '5336879280578138635'), ('☁️ Dropbox', '5336879280578138635'), ('📚 Coursera', '5336879280578138635'), ('🗣️ Duolingo', '5336879280578138635'), ('📱 QSMS', '6321257309188136835'), ('📸 INSTAGRAM', '5334868205091459431'), ('💄 HSBC', '5161519678597629383'), ('🎵 TIK TOK', '5327982530702359565'), ('🩵 TIK TOK', '5391044040860906456')]
 
 # Per-user setup state and per-country running configuration.
 users = {}
@@ -337,10 +337,13 @@ def country_keyboard(page=0):
         c = item["country"]
         key = country_short(c)
         state = "ON" if item["running"] else "OFF"
-        buttons.append([InlineKeyboardButton(
-            f"#{key} • {state} • {item['interval']}s / {item['length']}d",
-            callback_data=f"country:{key}"
-        )])
+        buttons.append([
+            InlineKeyboardButton(
+                f"#{key} • {state} • {item['interval']}s / {item['length']}d",
+                callback_data=f"country:{key}"
+            ),
+            InlineKeyboardButton("🗑️", callback_data=f"delcountry:{key}")
+        ])
     nav = []
     if page > 0:
         nav.append(InlineKeyboardButton("PREVIOUS", callback_data=f"cpage:{page-1}"))
@@ -360,12 +363,15 @@ def service_keyboard(page=0):
     rows = SERVICES[start:start + PAGE_SIZE]
     buttons = []
     for idx, (label, eid) in enumerate(rows, start=start):
-        buttons.append([InlineKeyboardButton(label, callback_data=f"service:{idx}")])
+        emoji = label.split()[0]
+        name  = " ".join(label.split()[1:])
+        btn_text = f'{label}'
+        buttons.append([InlineKeyboardButton(btn_text, callback_data=f"service:{idx}")])
     nav = []
     if page > 0:
-        nav.append(InlineKeyboardButton("PREVIOUS", callback_data=f"spage:{page-1}"))
+        nav.append(InlineKeyboardButton("◀️ PREV", callback_data=f"spage:{page-1}"))
     if (page + 1) * PAGE_SIZE < len(SERVICES):
-        nav.append(InlineKeyboardButton("NEXT", callback_data=f"spage:{page+1}"))
+        nav.append(InlineKeyboardButton("NEXT ▶️", callback_data=f"spage:{page+1}"))
     if nav:
         buttons.append(nav)
     return InlineKeyboardMarkup(buttons)
@@ -382,10 +388,10 @@ def admin_keyboard():
 
 def interval_keyboard(key):
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("3 SEC", callback_data=f"interval:{key}:3"),
-         InlineKeyboardButton("5 SEC", callback_data=f"interval:{key}:5")],
-        [InlineKeyboardButton("8 SEC", callback_data=f"interval:{key}:8"),
+        [InlineKeyboardButton("5 SEC", callback_data=f"interval:{key}:5"),
          InlineKeyboardButton("10 SEC", callback_data=f"interval:{key}:10")],
+        [InlineKeyboardButton("15 SEC", callback_data=f"interval:{key}:15"),
+         InlineKeyboardButton("20 SEC", callback_data=f"interval:{key}:20")],
     ])
 
 
@@ -452,12 +458,13 @@ def build_demo_post(item, service):
     # Keep custom-emoji tags OUTSIDE <pre>/<code>.
     # Telegram can otherwise render the fallback Unicode emoji instead of
     # the supplied premium/custom emoji.
+    # Clean Telegram-friendly box: real line breaks, no literal \\n text.
+    # Custom emojis are kept outside <pre>/<code> so Telegram can render them.
+    green_emoji = '<tg-emoji emoji-id="5210931095494733350">🟢</tg-emoji>'
     msg = (
-        "╔═══════════════╗\\n"
-        f"║ {custom_emoji(service_label.split()[0], service_id)} "
+        f"{custom_emoji(service_label.split()[0], service_id)} "
         f"{custom_emoji(flag, flag_id)} #{country_short(country)} "
-        f"{cc}✦{tag}✦{suffix} #EN\\n"
-        "╚═══════════════╝"
+        f"{cc} {green_emoji} {suffix} #EN"
     )
 
     # Native Telegram copy button + Telegram button styles.
@@ -465,7 +472,7 @@ def build_demo_post(item, service):
     keyboard = InlineKeyboardMarkup([
         [
             InlineKeyboardButton(
-                f"🔐 OTP: {code}",
+                f"{code}",
                 copy_text=CopyTextButton(code),
                 style="success",
             ),
@@ -490,9 +497,13 @@ async def post_one(app, key):
     item = country_cfg.get(key)
     if not item or not item["running"] or not GROUP_ID:
         return
-    # Admin's selected service; otherwise use Facebook for a harmless demo default.
-    admin_data = users.get(ADMIN_ID, {})
-    service = admin_data.get("service") or SERVICES[0]
+    # Country-র নিজস্ব service ব্যবহার করবে
+    svc_label = item.get("service_label")
+    svc_id    = item.get("service_id")
+    if svc_label and svc_id:
+        service = (svc_label, svc_id)
+    else:
+        service = SERVICES[0]  # default Facebook
     msg, keyboard = build_demo_post(item, service)
     try:
         await app.bot.send_message(
@@ -521,7 +532,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Keep the button text exactly equal to the text_handler checks below.
     kb = ReplyKeyboardMarkup(
         [["COUNTRY SELECT", "DELETE COUNTRY"],
-         ["SERVICE SELECT"],
          ["GENERATE TEST OTP"]],
         resize_keyboard=True,
     )
@@ -585,10 +595,25 @@ async def callbacks(update: Update, context: ContextTypes.DEFAULT_TYPE):
         c = country_cfg[key]["country"]
         await q.edit_message_text(
             f"✅ <b>Country selected</b>\n\n{country_display(c)}\n\n"
-            "⏱ <b>Select how many seconds between demo OTP posts:</b>",
+            "📱 <b>Select Service:</b>",
             parse_mode=ParseMode.HTML,
-            reply_markup=interval_keyboard(key),
+            reply_markup=service_keyboard(),
         )
+        return
+
+    if data.startswith("delcountry:"):
+        if uid != ADMIN_ID:
+            await q.answer("⛔ Admin only", show_alert=True)
+            return
+        key = data.split(":", 1)[1]
+        if key not in country_cfg:
+            await q.answer("❌ Not found", show_alert=True)
+            return
+        country_cfg[key]["running"] = False
+        del country_cfg[key]
+        save_countries()
+        await q.answer("✅ Deleted!", show_alert=True)
+        await q.edit_message_reply_markup(reply_markup=country_keyboard(0))
         return
 
     if data.startswith("lang:"):
@@ -603,10 +628,10 @@ async def callbacks(update: Update, context: ContextTypes.DEFAULT_TYPE):
         save_countries()
         users.setdefault(uid, {})["country_key"] = key
         await q.edit_message_text(
-            f"Language selected: <b>{lang}</b> — {LANGUAGES[lang]}\n\n"
-            "⏱ Now select interval:",
+            f"✅ <b>ভাষা নির্বাচন:</b> {lang}\n\n"
+            "🔢 <b>কত ডিজিটের OTP পাঠাবেন?</b>",
             parse_mode=ParseMode.HTML,
-            reply_markup=interval_keyboard(key),
+            reply_markup=length_keyboard(key),
         )
         return
 
@@ -616,13 +641,19 @@ async def callbacks(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await q.answer("Admin only", show_alert=True)
             return
         country_cfg[key]["interval"] = int(sec)
+        country_cfg[key]["running"] = True
         save_countries()
         users.setdefault(uid, {})["country_key"] = key
+        await ensure_country_task(context.application, key)
+        svc = country_cfg[key].get("service_label", "—")
         await q.edit_message_text(
-            f"⏱ Interval selected: <b>{sec} seconds</b>\n\n"
-            "🔢 Now select OTP digit length:",
+            f"✅ <b>সব সেটআপ সম্পন্ন!</b>\n\n"
+            f"🌍 Country: <b>#{key}</b>\n"
+            f"📱 Service: <b>{svc}</b>\n"
+            f"🔢 Digits: <b>{country_cfg[key]['length']}</b>\n"
+            f"⏱ Interval: <b>{sec} seconds</b>\n\n"
+            "🟢 OTP পাঠানো শুরু হয়েছে!",
             parse_mode=ParseMode.HTML,
-            reply_markup=length_keyboard(key),
         )
         return
 
@@ -632,15 +663,12 @@ async def callbacks(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await q.answer("Admin only", show_alert=True)
             return
         country_cfg[key]["length"] = int(length)
-        country_cfg[key]["running"] = True
         save_countries()
-        await ensure_country_task(context.application, key)
         await q.edit_message_text(
-            f"✅ <b>Country configured</b>\n\n"
-            f"🌍 #{key}\n⏱ Every <b>{country_cfg[key]['interval']}s</b>\n"
-            f"🔢 <b>{length} digits</b>\n\n"
-            "🟢 Demo OTP posting started.",
+            f"✅ <b>OTP Digits:</b> {length}\n\n"
+            "⏱ <b>কত সেকেন্ড পর পর OTP পাঠাবেন?</b>",
             parse_mode=ParseMode.HTML,
+            reply_markup=interval_keyboard(key),
         )
         return
 
@@ -723,18 +751,17 @@ async def callbacks(update: Update, context: ContextTypes.DEFAULT_TYPE):
         users.setdefault(uid, {})["service"] = (label, eid)
         key = users[uid].get("country_key")
         if not key:
-            await q.edit_message_text("❌ Select a country first.")
+            await q.edit_message_text("❌ আগে Country add করুন।")
             return
+        country_cfg[key]["service_label"] = label
+        country_cfg[key]["service_id"] = eid
+        save_countries()
         await q.edit_message_text(
-            f"✅ <b>Service selected</b>\n\n"
-            f"🌍 #{key}\n🛠 {label}\n\n"
-            "⏱ Admin must choose the interval, then OTP digit length.",
+            f"✅ <b>Service selected:</b> {label}\n\n"
+            "🌐 <b>ভাষা নির্বাচন করুন:</b>",
             parse_mode=ParseMode.HTML,
+            reply_markup=language_keyboard(key),
         )
-        if uid == ADMIN_ID:
-            await q.message.reply_text(
-                "⏱ Select interval:", reply_markup=interval_keyboard(key)
-            )
         return
 
 
@@ -825,10 +852,10 @@ async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         users[uid]["awaiting_add"] = False
         users[uid]["country_key"] = iso
         await update.message.reply_text(
-            f"Added <b>#{iso}</b> — {country_match[0]}\n\n"
-            "Select the OTP language:",
+            f"✅ Added <b>#{iso}</b> — {country_match[0]}\n\n"
+            "📱 <b>কোন Service-এর OTP পাঠাবেন?</b>",
             parse_mode=ParseMode.HTML,
-            reply_markup=language_keyboard(iso),
+            reply_markup=service_keyboard(),
         )
         return
 
@@ -836,9 +863,6 @@ async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    if BOT_TOKEN == "PUT_YOUR_BOTFATHER_TOKEN_HERE":
-        raise SystemExit("Set BOT_TOKEN before starting the bot.")
-
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("generate", generate))
