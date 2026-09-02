@@ -1,6 +1,2 @@
-pyTelegramBotAPI
-requests
-pycountry
-Flask
-firebase-admin
-phonenumbers
+python-telegram-bot==21.6
+flask
