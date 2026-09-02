@@ -9,9 +9,21 @@ import random
 import logging
 import re
 import json
+import threading
+from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, CopyTextButton
 from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
+
+# ===================== FLASK KEEP-ALIVE =====================
+flask_app = Flask(__name__)
+
+@flask_app.route('/')
+def index():
+    return "✅ OTP Panel Bot is running!", 200
+
+def run_flask():
+    flask_app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
 BOT_TOKEN = "8764978166:AAF4kcucI1unskbmtDDImyEAtmRV_f9Pq-I"
 ADMIN_ID = 6136815573
@@ -863,12 +875,18 @@ async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
+    # Flask keep-alive thread শুরু করছি
+    t = threading.Thread(target=run_flask, daemon=True)
+    t.start()
+    logging.info("🌐 Flask server started on port %s", os.environ.get('PORT', 8080))
+
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("generate", generate))
     app.add_handler(CommandHandler("admin", admin))
     app.add_handler(CallbackQueryHandler(callbacks))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_handler))
+    logging.info("🤖 Bot polling started...")
     app.run_polling()
 
 
