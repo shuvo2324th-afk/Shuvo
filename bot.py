@@ -479,8 +479,6 @@ def build_demo_post(item, service):
         f"{cc} {green_emoji} {suffix} #EN"
     )
 
-    # Native Telegram copy button + Telegram button styles.
-    # Requires python-telegram-bot 22.7+ and a recent Telegram client.
     keyboard = InlineKeyboardMarkup([
         [
             InlineKeyboardButton(
