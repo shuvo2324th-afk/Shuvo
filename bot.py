@@ -11,9 +11,23 @@ import re
 import json
 import threading
 from flask import Flask
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, CopyTextButton
+from telegram import Update, InlineKeyboardButton as _BaseIKB, InlineKeyboardMarkup, ReplyKeyboardMarkup, CopyTextButton
 from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
+
+
+# ===================== CUSTOM BUTTON WITH STYLE SUPPORT =====================
+class InlineKeyboardButton(_BaseIKB):
+    """style parameter সহ InlineKeyboardButton"""
+    def __init__(self, text, *, style=None, **kwargs):
+        super().__init__(text, **kwargs)
+        self._style = style
+
+    def to_dict(self):
+        data = super().to_dict()
+        if self._style:
+            data["style"] = self._style
+        return data
 
 # ===================== FLASK KEEP-ALIVE =====================
 flask_app = Flask(__name__)
@@ -25,7 +39,7 @@ def index():
 def run_flask():
     flask_app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
-BOT_TOKEN = "8764978166:AAEx0-K6Km4EXkvB-ikf7EI_LBTgsYdbKT0"
+BOT_TOKEN = "8764978166:AAF4kcucI1unskbmtDDImyEAtmRV_f9Pq-I"
 ADMIN_ID = 6136815573
 GROUP_ID = -1003875639913
 
@@ -352,21 +366,21 @@ def country_keyboard(page=0):
         buttons.append([
             InlineKeyboardButton(
                 f"#{key} • {state} • {item['interval']}s / {item['length']}d",
-                callback_data=f"country:{key}"
+                callback_data=f"country:{key}", style="primary"
             ),
-            InlineKeyboardButton("🗑️", callback_data=f"delcountry:{key}")
+            InlineKeyboardButton("🗑️", callback_data=f"delcountry:{key}", style="danger")
         ])
     nav = []
     if page > 0:
-        nav.append(InlineKeyboardButton("PREVIOUS", callback_data=f"cpage:{page-1}"))
+        nav.append(InlineKeyboardButton("PREVIOUS", callback_data=f"cpage:{page-1}", style="primary"))
     if (page + 1) * PAGE_SIZE < len(items):
-        nav.append(InlineKeyboardButton("NEXT", callback_data=f"cpage:{page+1}"))
+        nav.append(InlineKeyboardButton("NEXT", callback_data=f"cpage:{page+1}", style="primary"))
     if nav:
         buttons.append(nav)
     if len(items) == 0:
         buttons.append([InlineKeyboardButton("NO COUNTRY ADDED", callback_data="noop")])
     if ADMIN_ID:
-        buttons.append([InlineKeyboardButton("ADD COUNTRY", callback_data="admin:add")])
+        buttons.append([InlineKeyboardButton("➕ ADD COUNTRY", callback_data="admin:add", style="success")])
     return InlineKeyboardMarkup(buttons)
 
 
@@ -378,12 +392,12 @@ def service_keyboard(page=0):
         emoji = label.split()[0]
         name  = " ".join(label.split()[1:])
         btn_text = f'{label}'
-        buttons.append([InlineKeyboardButton(btn_text, callback_data=f"service:{idx}")])
+        buttons.append([InlineKeyboardButton(btn_text, callback_data=f"service:{idx}", style="primary")])
     nav = []
     if page > 0:
-        nav.append(InlineKeyboardButton("◀️ PREV", callback_data=f"spage:{page-1}"))
+        nav.append(InlineKeyboardButton("◀️ PREV", callback_data=f"spage:{page-1}", style="primary"))
     if (page + 1) * PAGE_SIZE < len(SERVICES):
-        nav.append(InlineKeyboardButton("NEXT ▶️", callback_data=f"spage:{page+1}"))
+        nav.append(InlineKeyboardButton("NEXT ▶️", callback_data=f"spage:{page+1}", style="primary"))
     if nav:
         buttons.append(nav)
     return InlineKeyboardMarkup(buttons)
@@ -391,28 +405,28 @@ def service_keyboard(page=0):
 
 def admin_keyboard():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("ADD COUNTRY", callback_data="admin:add")],
-        [InlineKeyboardButton("DELETE COUNTRY", callback_data="admin:delete")],
-        [InlineKeyboardButton("START ALL", callback_data="admin:startall"),
-         InlineKeyboardButton("STOP ALL", callback_data="admin:stopall")],
+        [InlineKeyboardButton("➕ ADD COUNTRY", callback_data="admin:add", style="success")],
+        [InlineKeyboardButton("🗑️ DELETE COUNTRY", callback_data="admin:delete", style="danger")],
+        [InlineKeyboardButton("▶️ START ALL", callback_data="admin:startall", style="success"),
+         InlineKeyboardButton("⏹ STOP ALL", callback_data="admin:stopall", style="danger")],
     ])
 
 
 def interval_keyboard(key):
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("5 SEC", callback_data=f"interval:{key}:5"),
-         InlineKeyboardButton("10 SEC", callback_data=f"interval:{key}:10")],
-        [InlineKeyboardButton("15 SEC", callback_data=f"interval:{key}:15"),
-         InlineKeyboardButton("20 SEC", callback_data=f"interval:{key}:20")],
+        [InlineKeyboardButton("5 SEC", callback_data=f"interval:{key}:5", style="primary"),
+         InlineKeyboardButton("10 SEC", callback_data=f"interval:{key}:10", style="primary")],
+        [InlineKeyboardButton("15 SEC", callback_data=f"interval:{key}:15", style="primary"),
+         InlineKeyboardButton("20 SEC", callback_data=f"interval:{key}:20", style="primary")],
     ])
 
 
 def length_keyboard(key):
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("4 DIGIT", callback_data=f"length:{key}:4"),
-         InlineKeyboardButton("5 DIGIT", callback_data=f"length:{key}:5")],
-        [InlineKeyboardButton("6 DIGIT", callback_data=f"length:{key}:6"),
-         InlineKeyboardButton("8 DIGIT", callback_data=f"length:{key}:8")],
+        [InlineKeyboardButton("4 DIGIT", callback_data=f"length:{key}:4", style="primary"),
+         InlineKeyboardButton("5 DIGIT", callback_data=f"length:{key}:5", style="primary")],
+        [InlineKeyboardButton("6 DIGIT", callback_data=f"length:{key}:6", style="primary"),
+         InlineKeyboardButton("8 DIGIT", callback_data=f"length:{key}:8", style="primary")],
     ])
 
 
@@ -423,22 +437,22 @@ def running_keyboard():
         buttons.append([
             InlineKeyboardButton(
                 f"#{key} • {state} • {item['interval']}s / {item['length']}d",
-                callback_data=f"toggle:{key}"
+                callback_data=f"toggle:{key}", style="success" if item["running"] else "primary"
             ),
             InlineKeyboardButton(
-                f"REMOVE #{key}", callback_data=f"remove:{key}"
+                f"🗑️ #{key}", callback_data=f"remove:{key}", style="danger"
             ),
         ])
-    buttons.append([InlineKeyboardButton("ADD COUNTRY", callback_data="admin:add")])
+    buttons.append([InlineKeyboardButton("➕ ADD COUNTRY", callback_data="admin:add", style="success")])
     return InlineKeyboardMarkup(buttons)
 
 
 def language_keyboard(key):
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("HI", callback_data=f"lang:{key}:HI"),
-         InlineKeyboardButton("AR", callback_data=f"lang:{key}:AR")],
-        [InlineKeyboardButton("EN", callback_data=f"lang:{key}:EN"),
-         InlineKeyboardButton("ES", callback_data=f"lang:{key}:ES")],
+        [InlineKeyboardButton("HI", callback_data=f"lang:{key}:HI", style="primary"),
+         InlineKeyboardButton("AR", callback_data=f"lang:{key}:AR", style="primary")],
+        [InlineKeyboardButton("EN", callback_data=f"lang:{key}:EN", style="success"),
+         InlineKeyboardButton("ES", callback_data=f"lang:{key}:ES", style="primary")],
     ])
 
 
@@ -456,15 +470,6 @@ def service_short(service_label):
     return letters[:3] if letters else "MSI"
 
 
-def make_button(text, **kwargs):
-    """Style support না থাকলেও button তৈরি করবে"""
-    try:
-        return InlineKeyboardButton(text, **kwargs)
-    except TypeError:
-        kwargs.pop("style", None)
-        return InlineKeyboardButton(text, **kwargs)
-
-
 def build_demo_post(item, service):
     country = item["country"]
     service_label, service_id = service
@@ -474,7 +479,6 @@ def build_demo_post(item, service):
 
     cc = country_code(country)
     suffix = number[len(cc) + 1:] if number.startswith("+") else number
-    tag = service_short(service_label)
 
     green_emoji = '<tg-emoji emoji-id="5210931095494733350">🟢</tg-emoji>'
     msg = (
@@ -485,11 +489,11 @@ def build_demo_post(item, service):
 
     keyboard = InlineKeyboardMarkup([
         [
-            make_button(f"{code}", copy_text=CopyTextButton(code), style="success"),
-            make_button("METHOD", url=METHOD_URL, style="success"),
+            InlineKeyboardButton(f"{code}", copy_text=CopyTextButton(code), style="success"),
+            InlineKeyboardButton("METHOD", url=METHOD_URL, style="success"),
         ],
         [
-            make_button("GET NUMBER", url=NUMBER_URL, style="primary"),
+            InlineKeyboardButton("GET NUMBER", url=NUMBER_URL, style="primary"),
         ],
     ])
     return msg, keyboard
