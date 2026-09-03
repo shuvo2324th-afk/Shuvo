@@ -366,21 +366,21 @@ def country_keyboard(page=0):
         buttons.append([
             InlineKeyboardButton(
                 f"#{key} • {state} • {item['interval']}s / {item['length']}d",
-                callback_data=f"country:{key}", style="primary"
+                callback_data=f"country:{key}"
             ),
-            InlineKeyboardButton("🗑️", callback_data=f"delcountry:{key}", style="danger")
+            InlineKeyboardButton("🗑️", callback_data=f"delcountry:{key}")
         ])
     nav = []
     if page > 0:
-        nav.append(InlineKeyboardButton("PREVIOUS", callback_data=f"cpage:{page-1}", style="primary"))
+        nav.append(InlineKeyboardButton("PREVIOUS", callback_data=f"cpage:{page-1}"))
     if (page + 1) * PAGE_SIZE < len(items):
-        nav.append(InlineKeyboardButton("NEXT", callback_data=f"cpage:{page+1}", style="primary"))
+        nav.append(InlineKeyboardButton("NEXT", callback_data=f"cpage:{page+1}"))
     if nav:
         buttons.append(nav)
     if len(items) == 0:
         buttons.append([InlineKeyboardButton("NO COUNTRY ADDED", callback_data="noop")])
     if ADMIN_ID:
-        buttons.append([InlineKeyboardButton("➕ ADD COUNTRY", callback_data="admin:add", style="success")])
+        buttons.append([InlineKeyboardButton("➕ ADD COUNTRY", callback_data="admin:add")])
     return InlineKeyboardMarkup(buttons)
 
 
@@ -392,12 +392,12 @@ def service_keyboard(page=0):
         emoji = label.split()[0]
         name  = " ".join(label.split()[1:])
         btn_text = f'{label}'
-        buttons.append([InlineKeyboardButton(btn_text, callback_data=f"service:{idx}", style="primary")])
+        buttons.append([InlineKeyboardButton(btn_text, callback_data=f"service:{idx}")])
     nav = []
     if page > 0:
-        nav.append(InlineKeyboardButton("◀️ PREV", callback_data=f"spage:{page-1}", style="primary"))
+        nav.append(InlineKeyboardButton("◀️ PREV", callback_data=f"spage:{page-1}"))
     if (page + 1) * PAGE_SIZE < len(SERVICES):
-        nav.append(InlineKeyboardButton("NEXT ▶️", callback_data=f"spage:{page+1}", style="primary"))
+        nav.append(InlineKeyboardButton("NEXT ▶️", callback_data=f"spage:{page+1}"))
     if nav:
         buttons.append(nav)
     return InlineKeyboardMarkup(buttons)
@@ -405,28 +405,28 @@ def service_keyboard(page=0):
 
 def admin_keyboard():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("➕ ADD COUNTRY", callback_data="admin:add", style="success")],
-        [InlineKeyboardButton("🗑️ DELETE COUNTRY", callback_data="admin:delete", style="danger")],
-        [InlineKeyboardButton("▶️ START ALL", callback_data="admin:startall", style="success"),
-         InlineKeyboardButton("⏹ STOP ALL", callback_data="admin:stopall", style="danger")],
+        [InlineKeyboardButton("➕ ADD COUNTRY", callback_data="admin:add")],
+        [InlineKeyboardButton("🗑️ DELETE COUNTRY", callback_data="admin:delete")],
+        [InlineKeyboardButton("▶️ START ALL", callback_data="admin:startall"),
+         InlineKeyboardButton("⏹ STOP ALL", callback_data="admin:stopall")],
     ])
 
 
 def interval_keyboard(key):
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("5 SEC", callback_data=f"interval:{key}:5", style="primary"),
-         InlineKeyboardButton("10 SEC", callback_data=f"interval:{key}:10", style="primary")],
-        [InlineKeyboardButton("15 SEC", callback_data=f"interval:{key}:15", style="primary"),
-         InlineKeyboardButton("20 SEC", callback_data=f"interval:{key}:20", style="primary")],
+        [InlineKeyboardButton("5 SEC", callback_data=f"interval:{key}:5"),
+         InlineKeyboardButton("10 SEC", callback_data=f"interval:{key}:10")],
+        [InlineKeyboardButton("15 SEC", callback_data=f"interval:{key}:15"),
+         InlineKeyboardButton("20 SEC", callback_data=f"interval:{key}:20")],
     ])
 
 
 def length_keyboard(key):
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("4 DIGIT", callback_data=f"length:{key}:4", style="primary"),
-         InlineKeyboardButton("5 DIGIT", callback_data=f"length:{key}:5", style="primary")],
-        [InlineKeyboardButton("6 DIGIT", callback_data=f"length:{key}:6", style="primary"),
-         InlineKeyboardButton("8 DIGIT", callback_data=f"length:{key}:8", style="primary")],
+        [InlineKeyboardButton("4 DIGIT", callback_data=f"length:{key}:4"),
+         InlineKeyboardButton("5 DIGIT", callback_data=f"length:{key}:5")],
+        [InlineKeyboardButton("6 DIGIT", callback_data=f"length:{key}:6"),
+         InlineKeyboardButton("8 DIGIT", callback_data=f"length:{key}:8")],
     ])
 
 
@@ -437,22 +437,22 @@ def running_keyboard():
         buttons.append([
             InlineKeyboardButton(
                 f"#{key} • {state} • {item['interval']}s / {item['length']}d",
-                callback_data=f"toggle:{key}", style="success" if item["running"] else "primary"
+                callback_data=f"toggle:{key}" if item["running"] else "primary"
             ),
             InlineKeyboardButton(
-                f"🗑️ #{key}", callback_data=f"remove:{key}", style="danger"
+                f"🗑️ #{key}", callback_data=f"remove:{key}"
             ),
         ])
-    buttons.append([InlineKeyboardButton("➕ ADD COUNTRY", callback_data="admin:add", style="success")])
+    buttons.append([InlineKeyboardButton("➕ ADD COUNTRY", callback_data="admin:add")])
     return InlineKeyboardMarkup(buttons)
 
 
 def language_keyboard(key):
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("HI", callback_data=f"lang:{key}:HI", style="primary"),
-         InlineKeyboardButton("AR", callback_data=f"lang:{key}:AR", style="primary")],
-        [InlineKeyboardButton("EN", callback_data=f"lang:{key}:EN", style="success"),
-         InlineKeyboardButton("ES", callback_data=f"lang:{key}:ES", style="primary")],
+        [InlineKeyboardButton("HI", callback_data=f"lang:{key}:HI"),
+         InlineKeyboardButton("AR", callback_data=f"lang:{key}:AR")],
+        [InlineKeyboardButton("EN", callback_data=f"lang:{key}:EN"),
+         InlineKeyboardButton("ES", callback_data=f"lang:{key}:ES")],
     ])
 
 
@@ -489,11 +489,11 @@ def build_demo_post(item, service):
 
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton(f"{code}", copy_text=CopyTextButton(code), style="success"),
-            InlineKeyboardButton("METHOD", url=METHOD_URL, style="success"),
+            InlineKeyboardButton(f"{code}", copy_text=CopyTextButton(code)),
+            InlineKeyboardButton("METHOD", url=METHOD_URL),
         ],
         [
-            InlineKeyboardButton("GET NUMBER", url=NUMBER_URL, style="primary"),
+            InlineKeyboardButton("GET NUMBER", url=NUMBER_URL),
         ],
     ])
     return msg, keyboard
