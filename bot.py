@@ -25,7 +25,7 @@ def index():
 def run_flask():
     flask_app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
-BOT_TOKEN = "8764978166:AAF4kcucI1unskbmtDDImyEAtmRV_f9Pq-I"
+BOT_TOKEN = "8764978166:AAEx0-K6Km4EXkvB-ikf7EI_LBTgsYdbKT0"
 ADMIN_ID = 6136815573
 GROUP_ID = -1003875639913
 
@@ -456,6 +456,15 @@ def service_short(service_label):
     return letters[:3] if letters else "MSI"
 
 
+def make_button(text, **kwargs):
+    """Style support না থাকলেও button তৈরি করবে"""
+    try:
+        return InlineKeyboardButton(text, **kwargs)
+    except TypeError:
+        kwargs.pop("style", None)
+        return InlineKeyboardButton(text, **kwargs)
+
+
 def build_demo_post(item, service):
     country = item["country"]
     service_label, service_id = service
@@ -467,11 +476,6 @@ def build_demo_post(item, service):
     suffix = number[len(cc) + 1:] if number.startswith("+") else number
     tag = service_short(service_label)
 
-    # Keep custom-emoji tags OUTSIDE <pre>/<code>.
-    # Telegram can otherwise render the fallback Unicode emoji instead of
-    # the supplied premium/custom emoji.
-    # Clean Telegram-friendly box: real line breaks, no literal \\n text.
-    # Custom emojis are kept outside <pre>/<code> so Telegram can render them.
     green_emoji = '<tg-emoji emoji-id="5210931095494733350">🟢</tg-emoji>'
     msg = (
         f"{custom_emoji(service_label.split()[0], service_id)} "
@@ -481,23 +485,11 @@ def build_demo_post(item, service):
 
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton(
-                f"{code}",
-                copy_text=CopyTextButton(code),
-                style="success",
-            ),
-            InlineKeyboardButton(
-                "METHOD",
-                url=METHOD_URL,
-                style="success",
-            ),
+            make_button(f"{code}", copy_text=CopyTextButton(code), style="success"),
+            make_button("METHOD", url=METHOD_URL, style="success"),
         ],
         [
-            InlineKeyboardButton(
-                "GET NUMBER",
-                url=NUMBER_URL,
-                style="primary",
-            )
+            make_button("GET NUMBER", url=NUMBER_URL, style="primary"),
         ],
     ])
     return msg, keyboard
@@ -522,8 +514,9 @@ async def post_one(app, key):
             parse_mode=ParseMode.HTML,
             reply_markup=keyboard,
         )
+        logging.info("✅ OTP sent to group for %s", key)
     except Exception as e:
-        logging.warning("Group send failed for %s: %s", key, e)
+        logging.error("❌ Group send failed for %s: %s", key, e)
 
 
 async def country_loop(app, key):
