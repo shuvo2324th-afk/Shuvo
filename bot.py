@@ -11,23 +11,9 @@ import re
 import json
 import threading
 from flask import Flask
-from telegram import Update, InlineKeyboardButton as _BaseIKB, InlineKeyboardMarkup, ReplyKeyboardMarkup, CopyTextButton
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, CopyTextButton
 from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
-
-
-# ===================== CUSTOM BUTTON WITH STYLE SUPPORT =====================
-class InlineKeyboardButton(_BaseIKB):
-    """style parameter সহ InlineKeyboardButton"""
-    def __init__(self, text, *, style=None, **kwargs):
-        super().__init__(text, **kwargs)
-        self._style = style
-
-    def to_dict(self):
-        data = super().to_dict()
-        if self._style:
-            data["style"] = self._style
-        return data
 
 # ===================== FLASK KEEP-ALIVE =====================
 flask_app = Flask(__name__)
