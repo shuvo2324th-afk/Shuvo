@@ -467,11 +467,14 @@ def build_demo_post(item, service):
     cc = country_code(country)
     suffix = number[len(cc) + 1:] if number.startswith("+") else number
 
-    green_emoji = '<tg-emoji emoji-id="5210931095494733350">🟢</tg-emoji>'
+    green_emoji = '<tg-emoji emoji-id="5978594450262199893">😊</tg-emoji>'
+    screen_emoji = '<tg-emoji emoji-id="6235307467337635626">🖥</tg-emoji>'
+    svc_emoji = f'<tg-emoji emoji-id="5389064576333527180">{service_label.split()[0]}</tg-emoji>'
+
     msg = (
-        f"{custom_emoji(service_label.split()[0], service_id)} "
-        f"{custom_emoji(flag, flag_id)} #{country_short(country)} "
-        f"{cc} {green_emoji} {suffix} #EN"
+        f"╔═══════════════╗\n"
+        f"║ {svc_emoji} {custom_emoji(flag, flag_id)} #{country_short(country)} {cc} {green_emoji} {suffix}{screen_emoji}EN\n"
+        f"╚═══════════════╝"
     )
     return msg, code
 
@@ -514,7 +517,7 @@ async def post_one(app, key):
                             "text": "GET NUMBER",
                             "icon_custom_emoji_id": "6206185428702206246",
                             "url": NUMBER_URL,
-                            "style": "danger"
+                            "style": "primary"
                         }
                     ]
                 ]
