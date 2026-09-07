@@ -10,22 +10,11 @@ import logging
 import re
 import json
 import threading
+import requests as _requests
 from flask import Flask
-from telegram import Update, InlineKeyboardButton as _IKB, InlineKeyboardMarkup, ReplyKeyboardMarkup, CopyTextButton
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, CopyTextButton
 from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
-
-
-class InlineKeyboardButton(_IKB):
-    def __init__(self, text, *, style=None, **kwargs):
-        super().__init__(text, **kwargs)
-        self._style = style
-
-    def to_dict(self, **kwargs):
-        data = super().to_dict(**kwargs)
-        if self._style:
-            data["style"] = self._style
-        return data
 
 # ===================== FLASK KEEP-ALIVE =====================
 flask_app = Flask(__name__)
@@ -37,7 +26,7 @@ def index():
 def run_flask():
     flask_app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
-BOT_TOKEN = "8764978166:AAEx0-K6Km4EXkvB-ikf7EI_LBTgsYdbKT0
+BOT_TOKEN = "8764978166:AAEx0-K6Km4EXkvB-ikf7EI_LBTgsYdbKT0"
 ADMIN_ID = 6136815573
 GROUP_ID = -1003875639913
 
@@ -484,53 +473,57 @@ def build_demo_post(item, service):
         f"{custom_emoji(flag, flag_id)} #{country_short(country)} "
         f"{cc} {green_emoji} {suffix} #EN"
     )
-
-    keyboard = InlineKeyboardMarkup([
-        [
-            InlineKeyboardButton(
-                f'<tg-emoji emoji-id="5956267526630412170">🗝</tg-emoji> {code}',
-                copy_text=CopyTextButton(code),
-                style="success",
-            ),
-            InlineKeyboardButton(
-                f'<tg-emoji emoji-id="5402444039410690633">📲</tg-emoji> METHOD',
-                url=METHOD_URL,
-                style="primary",
-            ),
-        ],
-        [
-            InlineKeyboardButton(
-                f'<tg-emoji emoji-id="6206185428702206246">✅</tg-emoji> GET NUMBER',
-                url=NUMBER_URL,
-                style="danger",
-            ),
-        ],
-    ])
-    return msg, keyboard
+    return msg, code
 
 
 async def post_one(app, key):
     item = country_cfg.get(key)
     if not item or not item["running"] or not GROUP_ID:
         return
-    # Country-র নিজস্ব service ব্যবহার করবে
     svc_label = item.get("service_label")
     svc_id    = item.get("service_id")
     if svc_label and svc_id:
         service = (svc_label, svc_id)
     else:
-        service = SERVICES[0]  # default Facebook
-    msg, keyboard = build_demo_post(item, service)
+        service = SERVICES[0]
+    msg, code = build_demo_post(item, service)
     try:
-        await app.bot.send_message(
-            chat_id=GROUP_ID,
-            text=msg,
-            parse_mode=ParseMode.HTML,
-            reply_markup=keyboard,
-        )
-        logging.info("✅ OTP sent to group for %s", key)
+        url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+        payload = {
+            "chat_id": GROUP_ID,
+            "text": msg,
+            "parse_mode": "HTML",
+            "reply_markup": {
+                "inline_keyboard": [
+                    [
+                        {
+                            "text": f"🗝 {code}",
+                            "copy_text": {"text": code},
+                            "style": "success"
+                        },
+                        {
+                            "text": "📲 METHOD",
+                            "url": METHOD_URL,
+                            "style": "primary"
+                        }
+                    ],
+                    [
+                        {
+                            "text": "✅ GET NUMBER",
+                            "url": NUMBER_URL,
+                            "style": "danger"
+                        }
+                    ]
+                ]
+            }
+        }
+        resp = _requests.post(url, json=payload, timeout=10)
+        if resp.ok:
+            logging.info("✅ OTP sent to group for %s", key)
+        else:
+            logging.error("❌ Group send failed: %s", resp.text)
     except Exception as e:
-        logging.error("❌ Group send failed for %s: %s", key, e)
+        logging.error("❌ Group send error: %s", e)
 
 
 async def country_loop(app, key):
