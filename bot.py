@@ -469,11 +469,11 @@ def build_demo_post(item, service):
 
     green_emoji = '<tg-emoji emoji-id="5978594450262199893">😊</tg-emoji>'
     screen_emoji = '<tg-emoji emoji-id="6235307467337635626">🖥</tg-emoji>'
-    svc_emoji = f'<tg-emoji emoji-id="5389064576333527180">{service_label.split()[0]}</tg-emoji>'
+    svc_emoji = f'<tg-emoji emoji-id="{service_id}">{service_label.split()[0]}</tg-emoji>'
 
     msg = (
         f"╔═══════════════╗\n"
-        f"║ {svc_emoji} {custom_emoji(flag, flag_id)} #{country_short(country)} {cc} {green_emoji} {suffix}{screen_emoji}EN\n"
+        f"║ {svc_emoji} {custom_emoji(flag, flag_id)} #{country_short(country)} {cc} {green_emoji} {suffix} {screen_emoji}EN\n"
         f"╚═══════════════╝"
     )
     return msg, code
