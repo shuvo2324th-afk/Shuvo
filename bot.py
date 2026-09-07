@@ -11,9 +11,21 @@ import re
 import json
 import threading
 from flask import Flask
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, CopyTextButton
+from telegram import Update, InlineKeyboardButton as _IKB, InlineKeyboardMarkup, ReplyKeyboardMarkup, CopyTextButton
 from telegram.constants import ParseMode
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, ContextTypes, filters
+
+
+class InlineKeyboardButton(_IKB):
+    def __init__(self, text, *, style=None, **kwargs):
+        super().__init__(text, **kwargs)
+        self._style = style
+
+    def to_dict(self, **kwargs):
+        data = super().to_dict(**kwargs)
+        if self._style:
+            data["style"] = self._style
+        return data
 
 # ===================== FLASK KEEP-ALIVE =====================
 flask_app = Flask(__name__)
@@ -25,9 +37,9 @@ def index():
 def run_flask():
     flask_app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
-BOT_TOKEN = "8764978166:AAEx0-K6Km4EXkvB-ikf7EI_LBTgsYdbKT0"
+BOT_TOKEN = "8764978166:AAEx0-K6Km4EXkvB-ikf7EI_LBTgsYdbKT0
 ADMIN_ID = 6136815573
-GROUP_ID = -1002670575248
+GROUP_ID = -1003875639913
 
 OTP_LENGTH = 6
 PAGE_SIZE = 12
@@ -400,10 +412,10 @@ def admin_keyboard():
 
 def interval_keyboard(key):
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("5 SEC", callback_data=f"interval:{key}:5"),
-         InlineKeyboardButton("10 SEC", callback_data=f"interval:{key}:10")],
-        [InlineKeyboardButton("15 SEC", callback_data=f"interval:{key}:15"),
-         InlineKeyboardButton("20 SEC", callback_data=f"interval:{key}:20")],
+        [InlineKeyboardButton("20 SEC", callback_data=f"interval:{key}:20"),
+         InlineKeyboardButton("30 SEC", callback_data=f"interval:{key}:30")],
+        [InlineKeyboardButton("40 SEC", callback_data=f"interval:{key}:40"),
+         InlineKeyboardButton("60 SEC", callback_data=f"interval:{key}:60")],
     ])
 
 
@@ -475,11 +487,23 @@ def build_demo_post(item, service):
 
     keyboard = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton(f"{code}", copy_text=CopyTextButton(code)),
-            InlineKeyboardButton("METHOD", url=METHOD_URL),
+            InlineKeyboardButton(
+                f'<tg-emoji emoji-id="5956267526630412170">🗝</tg-emoji> {code}',
+                copy_text=CopyTextButton(code),
+                style="success",
+            ),
+            InlineKeyboardButton(
+                f'<tg-emoji emoji-id="5402444039410690633">📲</tg-emoji> METHOD',
+                url=METHOD_URL,
+                style="primary",
+            ),
         ],
         [
-            InlineKeyboardButton("GET NUMBER", url=NUMBER_URL),
+            InlineKeyboardButton(
+                f'<tg-emoji emoji-id="6206185428702206246">✅</tg-emoji> GET NUMBER',
+                url=NUMBER_URL,
+                style="danger",
+            ),
         ],
     ])
     return msg, keyboard
