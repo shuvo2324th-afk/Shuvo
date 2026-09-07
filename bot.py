@@ -497,19 +497,22 @@ async def post_one(app, key):
                 "inline_keyboard": [
                     [
                         {
-                            "text": f"🗝 {code}",
+                            "text": f"{code}",
+                            "icon_custom_emoji_id": "5956267526630412170",
                             "copy_text": {"text": code},
                             "style": "success"
                         },
                         {
-                            "text": "📲 METHOD",
+                            "text": "METHOD",
+                            "icon_custom_emoji_id": "5402444039410690633",
                             "url": METHOD_URL,
                             "style": "primary"
                         }
                     ],
                     [
                         {
-                            "text": "✅ GET NUMBER",
+                            "text": "GET NUMBER",
+                            "icon_custom_emoji_id": "6206185428702206246",
                             "url": NUMBER_URL,
                             "style": "danger"
                         }
