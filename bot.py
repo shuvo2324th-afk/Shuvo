@@ -497,22 +497,19 @@ async def post_one(app, key):
                 "inline_keyboard": [
                     [
                         {
-                            "text": f'<tg-emoji emoji-id="5956267526630412170">🗝</tg-emoji> {code}',
-                            "text_parse_mode": "HTML",
+                            "text": f"🗝 {code}",
                             "copy_text": {"text": code},
                             "style": "success"
                         },
                         {
-                            "text": '<tg-emoji emoji-id="5402444039410690633">📲</tg-emoji> METHOD',
-                            "text_parse_mode": "HTML",
+                            "text": "📲 METHOD",
                             "url": METHOD_URL,
                             "style": "primary"
                         }
                     ],
                     [
                         {
-                            "text": '<tg-emoji emoji-id="6206185428702206246">✅</tg-emoji> GET NUMBER',
-                            "text_parse_mode": "HTML",
+                            "text": "✅ GET NUMBER",
                             "url": NUMBER_URL,
                             "style": "danger"
                         }
