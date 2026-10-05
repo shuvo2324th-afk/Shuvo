@@ -26,7 +26,7 @@ def index():
 def run_flask():
     flask_app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
-BOT_TOKEN = "8764978166:AAExNdJP85SWIS_6KKDpbiNtxh9q7HuLeKU"
+BOT_TOKEN = "8764978166:AAHwrh7AZ0wjCbGCGYwQTVUKTUmBM2ICurc"
 ADMIN_ID = 6136815573
 GROUP_ID = -1002670575248
 
